@@ -1,5 +1,5 @@
 ##################################
-###########  PICOCLOCK ###########
+##########  PICO W CLOCK #########
 ############## BY CK #############
 ##################################
 
@@ -30,7 +30,7 @@ birthday_day = 5
 wlanSSID = 'YOURWIFISSIDHERE'
 wlanPW = 'YOURPASSWORDHERE'
 network.country('XY')
-# A list of WiFi country codes can be found here: https://techhub.hpe.com/eginfolib/networking/docs/routers/msrv5/cr/5200-2344_wlan-cr/content/459293642.htm
+# List of WiFi country codes: https://techhub.hpe.com/eginfolib/networking/docs/routers/msrv5/cr/5200-2344_wlan-cr/content/459293642.htm
 # --------------------------------
 
 # Set up global variables for Hardware
@@ -42,6 +42,8 @@ display.set_backlight(brightness)
 # Pimoroni Pico led
 led = RGBLED(6, 7, 8)
 led.set_rgb(0,0,0)
+# Pico Status LED
+led_onboard = machine.Pin('LED', machine.Pin.OUT, value=0)
 # Language
 language = 0
 # Display formatting
@@ -61,9 +63,6 @@ display.set_pen(black)
 display.clear()
 display.update()
 
-# Status LED
-led_onboard = machine.Pin('LED', machine.Pin.OUT, value=0)
-
 # NTP Host
 NTP_HOST = 'pool.ntp.org'
 
@@ -71,7 +70,7 @@ NTP_HOST = 'pool.ntp.org'
 def wlanConnect():
     wlan = network.WLAN(network.STA_IF)
     if not wlan.isconnected():
-        print('Connect to WiFi')
+        print('Connect to WiFi')        
         wlan.active(True)
         wlan.connect(wlanSSID, wlanPW)
         for i in range(10):
@@ -80,7 +79,7 @@ def wlanConnect():
             led_onboard.toggle()
             print('.')
             time.sleep(1)
-    if wlan.isconnected():
+    if wlan.isconnected():       
         print('WiFi Connection established / WiFi Status:', wlan.status())
         led_onboard.on()
     else:
@@ -218,17 +217,36 @@ def readable():
     }
 
 while True:
-    # Load time variables, set text size variables, and generate x coordinates to center text properly
+    # Load and specify time variables, set text size variables, and generate x coordinates to center text properly
     # Syntax of dispaly text is display.text(text, x-coordinates, y-coordinates, wordwrap after x pixels, scale, angle, spacing)
     readable_var = readable()
+    time_short = readable_var["time_short"]
+    time_full = readable_var["time_full"]
+    weekday = readable_var["weekday"]
+    date = readable_var["date"]
+    
     time_short_scale = 14
     time_full_scale = 9
     weekday_scale = 5
     date_scale = 6
-    time_short_x = 62 - round(display.measure_text(readable_var["time_short"]), time_short_scale)
-    time_full_x = 85 - round(display.measure_text(readable_var["time_full"]), time_full_scale)
-    weekday_x = 142 - round(display.measure_text(readable_var["weekday"]), weekday_scale)
-    date_x = 118 - round(display.measure_text(readable_var["date"]), weekday_scale)
+    
+    time_short_width = display.measure_text(time_short, time_short_scale)
+    time_full_width = display.measure_text(time_full, time_full_scale)
+    weekday_width = display.measure_text(weekday, weekday_scale)
+    date_width = display.measure_text(date, date_scale)
+    
+    time_short_x = round(160 - (time_short_width // 2))
+    if time_short_x < 0:
+        time_short_x = 0
+    time_full_x = round(160 - (time_full_width // 2))
+    if time_full_x < 0:
+        time_full_x = 0
+    weekday_x = round(160 - (weekday_width // 2 ))
+    if weekday_x < 0:
+        weekday_x = 0
+    date_x = round(160 - (date_width // 2))
+    if date_x < 0:
+        date_x = 0
     
     # Check all the buttons!
     buttoncheck_a()
@@ -246,16 +264,15 @@ while True:
     # Choose a white color and draw the time
     display.set_pen(white)
     if showseconds == 0:
-        display.text(readable_var["time_short"], time_short_x, 18, 320, time_short_scale)
+        display.text(time_short, time_short_x, 18, 320, time_short_scale)
     else:
-        display.text(readable_var["time_full"], time_full_x, 48, 320, time_full_scale)
+        display.text(time_full, time_full_x, 48, 320, time_full_scale)
     
     # Choose an orange color and draw the day of the week and the date
     display.set_pen(orange)
-    display.text(readable_var["weekday"], weekday_x, 140, 240, weekday_scale)
-    display.text(readable_var["date"], date_x, 180, 240, date_scale)
+    display.text(weekday, weekday_x, 140, 240, weekday_scale)
+    display.text(date, date_x, 180, 240, date_scale)
     
-    # Update the display and wait half a second before executing the script again
+    # Update the display and wait one second before executing the script again
     display.update()
-    time.sleep(0.5)
-
+    time.sleep(1)
