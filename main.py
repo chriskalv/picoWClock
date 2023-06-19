@@ -27,10 +27,9 @@ birthday_wish_enabled = 1
 birthday_month = 9
 birthday_day = 14
 # WiFi Config:
-wlanSSID = 'YOURWIFISSIDHERE'
-wlanPW = 'YOURPASSWORDHERE'
-network.country('XY')
-# List of WiFi country codes: https://techhub.hpe.com/eginfolib/networking/docs/routers/msrv5/cr/5200-2344_wlan-cr/content/459293642.htm
+wlanSSID = 'HolzLAN'
+wlanPW = 'hokuspokus1337'
+network.country('DE')
 # --------------------------------
 
 # Set up global variables and settings for Hardware
@@ -255,9 +254,9 @@ def readable():
     }
 
 while True:
-    # Measure Temperature with Pico's onboard chip (and substract three degrees, as it seems to not measure accurately)
+    # Measure Temperature with Pico's onboard chip (and substract some degrees, as it does not measure accurately)
     ADC_voltage = adc.read_u16() * (3.3 / (65535))
-    temp_celsius = round(27 - (ADC_voltage - 0.706)/0.001721) - 3
+    temp_celsius = round(27 - (ADC_voltage - 0.706)/0.001721) - 4
     temp_celsius_str = str(temp_celsius)
     
     # Set font colors that adjust with the current temperature
@@ -303,19 +302,19 @@ while True:
     date_width = display.measure_text(date, date_scale)
     temp_width = display.measure_text(temp, temp_scale)
     
-    time_short_x = round((width // 2) - (time_short_width // 2)) + 4
+    time_short_x = round((width // 2) - (time_short_width // 2)) + 6
     if time_short_x < 0:
         time_short_x = 0
     time_full_x = round((width // 2) - (time_full_width // 2)) + 4
     if time_full_x < 0:
         time_full_x = 0
-    weekday_x = round((width // 2) - (weekday_width // 2 )) + 4
+    weekday_x = round((width // 2) - (weekday_width // 2 )) + 3
     if weekday_x < 0:
         weekday_x = 0
-    date_x = round((width // 2) - (date_width // 2)) + 4
+    date_x = round((width // 2) - (date_width // 2)) + 3
     if date_x < 0:
         date_x = 0
-    temp_x = round((width // 2) - (temp_width // 2)) + 4
+    temp_x = round((width // 2) - (temp_width // 2)) + 3
     if temp_x < 0:
         temp_x = 0
     
@@ -345,7 +344,7 @@ while True:
     # Choose a color reflecting the current temperature and draw the temperature
     display.set_pen(temp_color)
     if showtemperature == 1:
-        display.text(temp, temp_x, 4, width, temp_scale)
+        display.text(temp, temp_x, 5, width, temp_scale)
     
     # Choose an orange color and draw the day of the week and the date
     display.set_pen(orange)
@@ -355,4 +354,3 @@ while True:
     # Update the display and wait one second before executing the script again
     display.update()
     time.sleep(1)
-    
