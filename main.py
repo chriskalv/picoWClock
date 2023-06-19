@@ -27,9 +27,9 @@ birthday_wish_enabled = 1
 birthday_month = 9
 birthday_day = 14
 # WiFi Config:
-wlanSSID = 'HolzLAN'
-wlanPW = 'hokuspokus1337'
-network.country('DE')
+wlanSSID = 'YOURWIFISSIDHERE'
+wlanPW = 'YOURPASSWORDHERE'
+network.country('XY')
 # --------------------------------
 
 # Set up global variables and settings for Hardware
