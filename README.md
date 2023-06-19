@@ -13,9 +13,9 @@ The clock is the second iteration of my original [picoClock](https://github.com/
 | [![](https://i.imgur.com/3OQnNtv.jpg?raw=true)](https://i.imgur.com/3OQnNtv.jpg)   |
 
 ## Functionality
-+ Button A: Adjust brightness (down).
++ Button A: Adjust brightness.
 + Button B: Switch language of the displayed day of the week (German, English, Spanish and French are available).
-+ Button X: Adjust brightness (up).
++ Button X: Show/hide temperature.
 + Button Y: Show/hide seconds in the time display.
 
 ## Hardware
@@ -34,4 +34,4 @@ The clock is the second iteration of my original [picoClock](https://github.com/
 4. Check out the **Global Settings** section in the top part of `main.py`. There, you should enter the WiFi SSID, Password and country code of the WiFi you want to connect to from your Pico W. You can also choose to to display "Happy B-Day" instead of the day of the week on one day of the year.
 
 ## Case
-I did not make a specific case for this build, but [this one](https://www.printables.com/de/model/237722-raspberry-pi-pico-rtc-display-case) from another build uses the same hardware and should fit fairly well.
+I haven't made a case for the clock, yet, but will edit this post in case I make one.
