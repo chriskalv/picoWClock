@@ -2,14 +2,15 @@ picoWClock
 ========================
 Instructions to build a pico-based digital table clock showing the 
   + time
-  + date and 
-  + day of the week.
+  + date 
+  + day of the week and
+  + temperature (disabled by default).
 
 The clock is the second iteration of my original [picoClock](https://github.com/chriskalv/picoClock), which made use of a RTC module. This version here is able to use the Pico W's WiFi chip to connect to the internet and pull time data from there. The code is entirely micropython-based. Assembly of the device is really easy and even solder-free in case you have a pre-soldered Raspberry Pi Pico W.
 <br></br>
 | Assembled picoWClock   |
 | ------------- |
-| [![](https://i.imgur.com/asdf.png?raw=true)](https://i.imgur.com/asdf.png)   |
+| [![](https://i.imgur.com/3OQnNtv.jpg?raw=true)](https://i.imgur.com/3OQnNtv.jpg)   |
 
 ## Functionality
 + Button A: Adjust brightness (down).
