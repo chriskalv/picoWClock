@@ -34,4 +34,4 @@ The clock is the second iteration of my original [picoClock](https://github.com/
 4. Check out the **Global Settings** section in the top part of `main.py`. There, you should enter the WiFi SSID, Password and country code of the WiFi you want to connect to from your Pico W. You can also choose to to display "Happy B-Day" instead of the day of the week on one day of the year.
 
 ## Case
-I haven't made a case for the clock, yet, but will edit this post in case I make one.
+I haven't made a case for the clock myself, but [this one](https://www.printables.com/de/model/473270-pimoroni-pico-display-pack-20-case) will do.
