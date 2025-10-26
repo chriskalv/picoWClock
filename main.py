@@ -194,7 +194,7 @@ def setTimeRTC():
                     year += 1
 
     # Check for and change to realistic time in tm for daylight savings time
-    if ((month > 3 or (month == 3 and day > last_sunday_in_march)) and (month < 10 or (month == 10 and day <= last_sunday_in_october))):
+    if ((month > 3 or (month == 3 and day >= last_sunday_in_march)) and (month < 10 or (month == 10 and day < last_sunday_in_october))):
         hours += 1
         if hours == 24:
             hours = 0
